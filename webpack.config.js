@@ -51,6 +51,31 @@ module.exports = {
           author: "wkb",
         },
       },
+      {
+        test: /\.js$/,
+        loader: "./loader/babel-loader/index.js",
+        options: {
+          presets: [
+            [
+              "@babel/preset-env",
+              // {
+              //   useBuiltIns: "usage",
+              //   corejs: "3.28",
+              // },
+            ],
+          ],
+          plugins: ["@babel/plugin-transform-runtime"], // 减少代码体积
+        },
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        loader: "./loader/file-loader/index.js",
+        type: "javascript/auto", // 阻止webpack处理资源
+      },
     ],
   },
   plugins: [
