@@ -6,5 +6,5 @@ module.exports = function (content) {
 // pitch优先执行
 module.exports.pitch = function () {
   console.log("pitch loader 2");
-  return "res";
+  // return "res";
 };

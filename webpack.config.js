@@ -40,6 +40,17 @@ module.exports = {
         test: /\.js$/,
         loader: "./loader/demo/pitch3.js",
       },
+      {
+        test: /\.js$/,
+        loader: "./loader/clean-console.js",
+      },
+      {
+        test: /\.js$/,
+        loader: "./loader/banner-loader/banner.js",
+        options: {
+          author: "wkb",
+        },
+      },
     ],
   },
   plugins: [
