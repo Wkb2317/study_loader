@@ -31,6 +31,8 @@ module.exports = class BannerWebpackPlugin {
           },
         };
       });
+
+      callback();
     });
   }
 };

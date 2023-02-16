@@ -1,7 +1,8 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TestPlugin = require("./plugins/test-plugins");
-const BannerWebpackPlugin = require("./plugins/banner-webpack-plugin/banner-webpack-plugin");
+const BannerWebpackPlugin = require("./plugins/banner-webpack-plugin/banner-webpack-plugin.js");
+const CleanWebpackPlugin = require("./plugins/clean-webpack-plugin/clean-webpack-plugin.js");
 
 module.exports = {
   mode: "production",
@@ -10,7 +11,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "./dist"),
     filename: "[name].[contenthash:10].js",
-    clean: true,
+    // clean: true,
   },
   devServer: {
     port: 3000,
@@ -81,5 +82,6 @@ module.exports = {
     new BannerWebpackPlugin({
       author: "wkb",
     }),
+    new CleanWebpackPlugin(),
   ],
 };
