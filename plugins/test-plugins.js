@@ -11,6 +11,8 @@ module.exports = class TestPlugin {
   }
 
   apply(compiler) {
+    console.log(compiler);
+    debugger;
     console.log("test apply");
 
     // 钩子注册

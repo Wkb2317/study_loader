@@ -1,9 +1,11 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TestPlugin = require("./plugins/test-plugins");
+const BannerWebpackPlugin = require("./plugins/banner-webpack-plugin/banner-webpack-plugin");
 
 module.exports = {
-  mode: "development",
+  mode: "production",
+  devtool: false,
   entry: path.resolve(__dirname, "./src/main.js"),
   output: {
     path: path.resolve(__dirname, "./dist"),
@@ -45,29 +47,21 @@ module.exports = {
         test: /\.js$/,
         loader: "./loader/clean-console.js",
       },
-      {
-        test: /\.js$/,
-        loader: "./loader/banner-loader/banner.js",
-        options: {
-          author: "wkb",
-        },
-      },
-      {
-        test: /\.js$/,
-        loader: "./loader/babel-loader/index.js",
-        options: {
-          presets: [
-            [
-              "@babel/preset-env",
-              // {
-              //   useBuiltIns: "usage",
-              //   corejs: "3.28",
-              // },
-            ],
-          ],
-          plugins: ["@babel/plugin-transform-runtime"], // 减少代码体积
-        },
-      },
+      // {
+      //   test: /\.js$/,
+      //   loader: "./loader/banner-loader/banner.js",
+      //   options: {
+      //     author: "wkb",
+      //   },
+      // },
+      // {
+      //   test: /\.js$/,
+      //   loader: "./loader/babel-loader/index.js",
+      //   options: {
+      //     presets: [["@babel/preset-env"]],
+      //     plugins: ["@babel/plugin-transform-runtime"], // 减少代码体积
+      //   },
+      // },
       {
         test: /\.css$/,
         use: ["./loader/style-loader", "css-loader"],
@@ -83,6 +77,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "./public/index.html"),
     }),
-    new TestPlugin(),
+    // new TestPlugin(),
+    new BannerWebpackPlugin({
+      author: "wkb",
+    }),
   ],
 };
