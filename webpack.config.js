@@ -4,6 +4,7 @@ const TestPlugin = require("./plugins/test-plugins");
 const BannerWebpackPlugin = require("./plugins/banner-webpack-plugin/banner-webpack-plugin.js");
 const CleanWebpackPlugin = require("./plugins/clean-webpack-plugin/clean-webpack-plugin.js");
 const AnalysisWebpackPlugin = require("./plugins/analysis-webpack-plugin/analysis-webpack-plugin");
+const InlineWebpackPlugin = require("./plugins/inline-webpack-plugin/inline-webpack-plugin");
 
 module.exports = {
   mode: "production",
@@ -18,6 +19,14 @@ module.exports = {
     port: 3000,
     hot: true,
     open: true,
+  },
+  optimization: {
+    splitChunks: {
+      chunks: "all",
+    },
+    runtimeChunk: {
+      name: (entrypoint) => `runtime~${entrypoint.name}`,
+    },
   },
   module: {
     rules: [
@@ -85,5 +94,6 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
     new AnalysisWebpackPlugin(),
+    new InlineWebpackPlugin([/runtime/g]),
   ],
 };
